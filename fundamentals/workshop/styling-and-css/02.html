@@ -16,15 +16,15 @@
         padding: "0.5em 1em",
         fontSize: "1.4em",
         background: "hsl(217, 71%, 53%)",
-        color: "#fff"
+        color: "#fff",
       };
 
-      const MyComponent = props => {
+      const MyComponent = () => {
         const columnclassName = "column";
         const paragraphClassName = "has-background-primary has-text-white";
 
         return (
-          <div className="columns">
+          <div id="my-id" className="columns">
             <div className={columnclassName}>
               <p style={firstParagraphStyle}>First column</p>
             </div>
@@ -41,7 +41,7 @@
         );
       };
 
-      ReactDOM.render(<MyComponent active={3} />, rootElement);
+      ReactDOM.render(<MyComponent />, rootElement);
     </script>
   </body>
 </html>
