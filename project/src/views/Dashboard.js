@@ -1,7 +1,17 @@
 import React, { useState, useEffect } from "react";
-import { Jumbotron, Button, Table, Row, Col } from "reactstrap";
-import CoursesTable from '../components/CoursesTable';
-import { fetchStats, fetchCourses } from '../api';
+import {
+  Jumbotron,
+  Table,
+  Row,
+  Col,
+  Card,
+  CardBody,
+  CardText,
+  Badge,
+  Spinner,
+} from "reactstrap";
+import CoursesTable from "../components/CoursesTable";
+import { fetchStats, fetchCourses } from "../api";
 
 const Dashboard = () => {
   const [stats, setStats] = useState([]);
@@ -9,7 +19,10 @@ const Dashboard = () => {
 
   useEffect(() => {
     const fetshData = async () => {
-      const [responseStats, responseCourses] = await Promise.all([fetchStats(), fetchCourses()]);
+      const [responseStats, responseCourses] = await Promise.all([
+        fetchStats(),
+        fetchCourses(),
+      ]);
       setStats(responseStats);
       setCourses(responseCourses);
     };
@@ -18,31 +31,48 @@ const Dashboard = () => {
   }, []);
 
   return (
-    <div className="App">
-      <h1>Dashboard</h1>
-
-      <Jumbotron>
-        <h1 className="display-3">Hello, world!</h1>
-        <p className="lead">
-          This is a simple hero unit, a simple Jumbotron-style component for
-          calling extra attention to featured content or information.
-        </p>
-        <hr className="my-2" />
-        <p>
-          It uses utility classes for typography and spacing to space content
-          out within the larger container.
-        </p>
-        <p className="lead">
-          <Button color="primary">Learn More</Button>
-        </p>
-      </Jumbotron>
+    <>
+      <Row>
+        <Col xs={12}>
+          <Jumbotron>
+            <h1>Welcome to Code.Hub Dashboard!</h1>
+            <p className="lead">Manage everything and have fun!</p>
+          </Jumbotron>
+        </Col>
+      </Row>
 
       <Row>
-        {stats.length > 0 &&
+        {stats ? (
           stats.map(({ id, title, amount }) => (
-            <Col key={id}>{title} {amount}!!!!</Col>
-          ))}
+            <Col key={id} xs={12} sm={6} md={3}>
+              <div>
+                <Card>
+                  <CardBody>
+                    <CardText>
+                      {title}: <Badge>{amount}</Badge>
+                    </CardText>
+                  </CardBody>
+                </Card>
+              </div>
+            </Col>
+          ))
+        ) : (
+          <Col xs={12}>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                width: "100%",
+                height: "200px",
+              }}
+            >
+              <Spinner color="dark" />
+            </div>
+          </Col>
+        )}
       </Row>
+
       <Table>
         <thead>
           <tr>
@@ -53,10 +83,12 @@ const Dashboard = () => {
           </tr>
         </thead>
         <tbody>
-          {courses.map((data) => <CoursesTable key={data.id} {...data} />)}
+          {courses.map((data) => (
+            <CoursesTable key={data.id} {...data} />
+          ))}
         </tbody>
       </Table>
-    </div>
+    </>
   );
 };
 
