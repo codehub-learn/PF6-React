@@ -23,6 +23,7 @@ const Dashboard = () => {
         fetchStats(),
         fetchCourses(),
       ]);
+
       setStats(responseStats);
       setCourses(responseCourses);
     };
@@ -92,19 +93,17 @@ const Dashboard = () => {
               </tbody>
             </Table>
           ) : (
-            <Col xs={12}>
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  width: "100%",
-                  height: "200px",
-                }}
-              >
-                <Spinner color="dark" />
-              </div>
-            </Col>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                width: "100%",
+                height: "200px",
+              }}
+            >
+              <Spinner color="dark" />
+            </div>
           )}
         </Col>
       </Row>
