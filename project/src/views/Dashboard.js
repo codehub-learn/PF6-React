@@ -42,7 +42,7 @@ const Dashboard = () => {
       </Row>
 
       <Row>
-        {stats ? (
+        {stats.length ? (
           stats.map(({ id, title, amount }) => (
             <Col key={id} xs={12} sm={6} md={3}>
               <div>
@@ -73,21 +73,41 @@ const Dashboard = () => {
         )}
       </Row>
 
-      <Table>
-        <thead>
-          <tr>
-            <th>Title</th>
-            <th>Bookable</th>
-            <th>Price</th>
-            <th>Date</th>
-          </tr>
-        </thead>
-        <tbody>
-          {courses.map((data) => (
-            <CoursesTable key={data.id} {...data} />
-          ))}
-        </tbody>
-      </Table>
+      <Row>
+        <Col xs={12}>
+          {courses.length ? (
+            <Table>
+              <thead>
+                <tr>
+                  <th>Title</th>
+                  <th>Bookable</th>
+                  <th>Price</th>
+                  <th>Date</th>
+                </tr>
+              </thead>
+              <tbody>
+                {courses.map((data) => (
+                  <CoursesTable key={data.id} {...data} />
+                ))}
+              </tbody>
+            </Table>
+          ) : (
+            <Col xs={12}>
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  width: "100%",
+                  height: "200px",
+                }}
+              >
+                <Spinner color="dark" />
+              </div>
+            </Col>
+          )}
+        </Col>
+      </Row>
     </>
   );
 };
