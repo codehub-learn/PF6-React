@@ -40,6 +40,7 @@ export const deleteCourse = (id) =>
 
 // Data to add:
 // {
+//   "id": "01", // only for updateCourse
 //   "title": "React",
 //   "imagePath": "/react.png",
 //   "price": {

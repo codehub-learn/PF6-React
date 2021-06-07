@@ -1,16 +1,15 @@
 import React, { useState, useEffect } from "react";
 import {
   Jumbotron,
-  Table,
   Row,
   Col,
   Card,
   CardBody,
   CardText,
   Badge,
-  Spinner,
 } from "reactstrap";
 import CoursesTable from "../components/CoursesTable";
+import Loader from "../components/Loader";
 import { fetchStats, fetchCourses } from "../api";
 
 const Dashboard = () => {
@@ -59,52 +58,14 @@ const Dashboard = () => {
           ))
         ) : (
           <Col xs={12}>
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                width: "100%",
-                height: "200px",
-              }}
-            >
-              <Spinner color="dark" />
-            </div>
+            <Loader />
           </Col>
         )}
       </Row>
 
       <Row>
         <Col xs={12}>
-          {courses.length ? (
-            <Table>
-              <thead>
-                <tr>
-                  <th>Title</th>
-                  <th>Bookable</th>
-                  <th>Price</th>
-                  <th>Date</th>
-                </tr>
-              </thead>
-              <tbody>
-                {courses.map((data) => (
-                  <CoursesTable key={data.id} {...data} />
-                ))}
-              </tbody>
-            </Table>
-          ) : (
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                width: "100%",
-                height: "200px",
-              }}
-            >
-              <Spinner color="dark" />
-            </div>
-          )}
+          {courses.length ? <CoursesTable courses={courses} /> : <Loader />}
         </Col>
       </Row>
     </>

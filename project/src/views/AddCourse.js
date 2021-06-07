@@ -1,7 +1,7 @@
 import React from "react";
 
 const AddCourse = () => {
-  return "AddCourse ";
+  return <h1>Add Course</h1>;
 };
 
-export default AddCourse ;
+export default AddCourse;
