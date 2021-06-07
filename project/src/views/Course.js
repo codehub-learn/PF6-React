@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useRouteMatch } from "react-router-dom";
+import CourseEntry from "../components/CourseEntry";
 import { fetchCourse } from "../api";
 import Loader from "../components/Loader";
 
 const Course = () => {
   const match = useRouteMatch();
   const [course, setCourse] = useState(null);
-
   useEffect(() => {
     const fetshCourse = async () => {
       const course = await fetchCourse(match.params.id);
@@ -17,9 +17,28 @@ const Course = () => {
     fetshCourse();
   }, [match.params.id]);
 
-  console.log(course);
+  const handleEdit = (e) => {
+    e.preventDefault();
+    console.log("handle edit");
+  };
+  const handleDelete = (e) => {
+    e.preventDefault();
+    console.log("handle delete");
+  };
 
-  return <>{course ? <h1>{course.title}</h1> : <Loader />}</>;
+  return (
+    <>
+      {course ? (
+        <CourseEntry
+          {...course}
+          handleEdit={handleEdit}
+          handleDelete={handleDelete}
+        />
+      ) : (
+        <Loader />
+      )}
+    </>
+  );
 };
 
 export default Course;

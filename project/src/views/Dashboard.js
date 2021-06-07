@@ -1,21 +1,13 @@
 import React, { useState, useEffect } from "react";
-import {
-  Jumbotron,
-  Row,
-  Col,
-  Card,
-  CardBody,
-  CardText,
-  Badge,
-} from "reactstrap";
+import { Jumbotron, Row, Col } from "reactstrap";
 import CoursesTable from "../components/CoursesTable";
+import StatEntry from "../components/StatEntry";
 import Loader from "../components/Loader";
 import { fetchStats, fetchCourses } from "../api";
 
 const Dashboard = () => {
   const [stats, setStats] = useState([]);
   const [courses, setCourses] = useState([]);
-
   useEffect(() => {
     const fetshData = async () => {
       const [responseStats, responseCourses] = await Promise.all([
@@ -33,7 +25,7 @@ const Dashboard = () => {
   return (
     <>
       <Row>
-        <Col xs={12}>
+        <Col xs={12} id="jumbotron-container">
           <Jumbotron>
             <h1>Welcome to Code.Hub Dashboard!</h1>
             <p className="lead">Manage everything and have fun!</p>
@@ -41,19 +33,11 @@ const Dashboard = () => {
         </Col>
       </Row>
 
-      <Row>
+      <Row id="stats-container">
         {stats.length ? (
           stats.map(({ id, title, amount }) => (
             <Col key={id} xs={12} sm={6} md={3}>
-              <div>
-                <Card>
-                  <CardBody>
-                    <CardText>
-                      {title}: <Badge>{amount}</Badge>
-                    </CardText>
-                  </CardBody>
-                </Card>
-              </div>
+              <StatEntry title={title} amount={amount} />
             </Col>
           ))
         ) : (

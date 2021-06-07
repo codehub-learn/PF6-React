@@ -1,3 +1,15 @@
+#jumbotron-container {
+  margin-top: 2rem;
+}
+
+#stats-container {
+  margin-bottom: 2rem;
+}
+
 .course-card {
-  margin-bottom: 1rem;
+  margin-bottom: 2rem;
+}
+
+.no-padding {
+  padding: 0;
 }
